@@ -1,11 +1,11 @@
-package com.dcankayrak.productservice.dto.request;
+package com.dcankayrak.userservice.dto.response;
 
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-public class ProductSaveRequestDto {
+public class ProductListItemResponseDto {
     private String name;
     private BigDecimal price;
     private String description;

@@ -1,5 +1,9 @@
 package com.dcankayrak.productservice.service;
 
+import com.dcankayrak.productservice.converter.CategoryConverter;
+import com.dcankayrak.productservice.converter.GeneralConverter;
+import com.dcankayrak.productservice.core.Slugify;
+import com.dcankayrak.productservice.dto.request.category.CategorySaveRequestDto;
 import com.dcankayrak.productservice.dto.response.CategoryListResponseDto;
 import com.dcankayrak.productservice.entity.Category;
 import com.dcankayrak.productservice.repository.CategoryRepository;
@@ -13,8 +17,18 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final GeneralConverter generalConverter;
+    private final Slugify slugify;
 
     public List<CategoryListResponseDto> getCategories(){
-        return null;
+        List<Category> categories = this.categoryRepository.findAll();
+        List<CategoryListResponseDto> tempCategories = generalConverter.convertEntitiesToTargetEntity(categories,CategoryListResponseDto.class);
+        return tempCategories;
+    }
+
+    public void saveCategory(CategorySaveRequestDto categorySaveRequestDto) {
+        Category tempCategory = generalConverter.convertEntityToTargetEntity(categorySaveRequestDto,Category.class);
+        tempCategory.setSlug(slugify.slugify(tempCategory.getName()));
+        this.categoryRepository.save(tempCategory);
     }
 }

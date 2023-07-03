@@ -1,6 +1,7 @@
 package com.dcankayrak.productservice.controller;
 
-import com.dcankayrak.productservice.dto.request.ProductSaveRequestDto;
+import com.dcankayrak.productservice.dto.request.product.ProductSaveRequestDto;
+import com.dcankayrak.productservice.dto.request.product.ProductUpdateRequestDto;
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -37,4 +38,17 @@ public class ProductController {
         this.productService.saveProduct(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ProductListResponseDto> updateProduct(@RequestBody ProductUpdateRequestDto request, @RequestParam Long id){
+        ProductListResponseDto tempProductListResponseDto = this.productService.updateProduct(request,id);
+        return new ResponseEntity<>(tempProductListResponseDto,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity<Void> deleteProduct(@RequestParam Long productId){
+        this.productService.deleteProduct(productId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

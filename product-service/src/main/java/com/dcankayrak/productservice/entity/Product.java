@@ -16,6 +16,7 @@ import org.apache.commons.text.*;
 public class Product extends BaseEntity {
     private String name;
     private BigDecimal price;
+    private String imageUrl;
     private String description;
     private String slug;
 }
