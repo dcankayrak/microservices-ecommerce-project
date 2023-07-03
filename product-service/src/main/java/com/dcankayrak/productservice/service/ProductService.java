@@ -34,7 +34,7 @@ public class ProductService {
         tempProduct.setName(request.getName());
         tempProduct.setPrice(request.getPrice());
         tempProduct.setDescription(request.getDescription());
-        tempProduct.setSlug(slugify.slugify(request.getName()));
+        tempProduct.setSlug(slugify.slugify(request.getName(),'p'));
         productRepository.save(tempProduct);
     }
 

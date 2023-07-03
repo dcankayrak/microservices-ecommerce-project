@@ -5,7 +5,7 @@ import java.util.Random;
 
 @Component
 public class Slugify {
-    public String slugify(String word)
+    public String slugify(String word,char prefix)
     {
         String result = word.trim().toLowerCase();
         char[] oldValue = new char[] { ' ','ö', 'Ö', 'ü', 'Ü', 'ç', 'Ç', 'İ', 'ı', 'Ğ', 'ğ', 'Ş', 'ş' };
@@ -14,7 +14,7 @@ public class Slugify {
         {
             result = result.replace(oldValue[i], newValue[i]);
         }
-        result += "-p-"+createRandomNumber();
+        result += "-"+prefix+"-"+createRandomNumber();
         return result;
     }
 

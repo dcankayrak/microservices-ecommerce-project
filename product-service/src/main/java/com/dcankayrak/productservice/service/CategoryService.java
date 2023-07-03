@@ -28,7 +28,7 @@ public class CategoryService {
 
     public void saveCategory(CategorySaveRequestDto categorySaveRequestDto) {
         Category tempCategory = generalConverter.convertEntityToTargetEntity(categorySaveRequestDto,Category.class);
-        tempCategory.setSlug(slugify.slugify(tempCategory.getName()));
+        tempCategory.setSlug(slugify.slugify(tempCategory.getName(),'c'));
         this.categoryRepository.save(tempCategory);
     }
 }
