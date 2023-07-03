@@ -1,6 +1,7 @@
 package com.dcankayrak.productservice.service;
 
 import com.dcankayrak.productservice.converter.ProductConverter;
+import com.dcankayrak.productservice.core.Slugify;
 import com.dcankayrak.productservice.dto.request.ProductSaveRequestDto;
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.entity.Product;
@@ -16,6 +17,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
+    private final Slugify slugify;
 
     public List<ProductListResponseDto> getProductList() {
         return productConverter.convertProductsToProductListResponseDto(productRepository.findAll());
@@ -30,7 +32,7 @@ public class ProductService {
         tempProduct.setName(request.getName());
         tempProduct.setPrice(request.getPrice());
         tempProduct.setDescription(request.getDescription());
-        tempProduct.setSlug(request.getName());
+        tempProduct.setSlug(slugify.slugify(request.getName()));
         productRepository.save(tempProduct);
     }
 }
