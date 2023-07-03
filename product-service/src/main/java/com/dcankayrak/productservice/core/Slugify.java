@@ -1,6 +1,7 @@
 package com.dcankayrak.productservice.core;
 
 import org.springframework.stereotype.Component;
+import java.util.Random;
 
 @Component
 public class Slugify {
@@ -13,6 +14,13 @@ public class Slugify {
         {
             result = result.replace(oldValue[i], newValue[i]);
         }
+        result += "-p-"+createRandomNumber();
         return result;
+    }
+
+    public Integer createRandomNumber(){
+        Random random = new Random();
+        Integer randomNumber = random.nextInt(90000000) + 10000000;
+        return randomNumber;
     }
 }
