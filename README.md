@@ -6,4 +6,5 @@
 - OpenFeign
 - ModelMapper
 - Jpa Repository
+- Redis
 - Lombok...
