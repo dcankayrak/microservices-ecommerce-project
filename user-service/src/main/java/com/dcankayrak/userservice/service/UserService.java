@@ -9,6 +9,7 @@ import com.dcankayrak.userservice.feign.VerifyPhoneServiceClient;
 import com.dcankayrak.userservice.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,5 +41,10 @@ public class UserService {
     private boolean validatePhoneNumber(String phoneNumber){
         VerifyPhoneNumberResponseDto verifyPhoneNumberResponseDto = verifyPhoneService.verifyPhoneNumber("veriphone.p.rapidapi.com","680f983c50msh8d3d56c18fd41f4p193f02jsn7d9aeba7eb32",phoneNumber);
         return verifyPhoneNumberResponseDto.getPhone_valid();
+    }
+
+    public User getUserWithId(Long id) {
+        User findedUser = this.userRepository.findById(id).orElseThrow(() -> {throw new UserException("Aradığınız kullanıcı bulunamadı!");});
+        return findedUser;
     }
 }

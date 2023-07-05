@@ -9,6 +9,8 @@ import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.exception.ProductNotFoundException;
 import com.dcankayrak.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +23,13 @@ public class ProductService {
     private final ProductConverter productConverter;
     private final Slugify slugify;
 
+    @Cacheable(value = "productList",cacheManager = "defaultCacheManager")
     public List<ProductListResponseDto> getProductList() {
+        return productConverter.convertProductsToProductListResponseDto(productRepository.findAll());
+    }
+
+    @CacheEvict(value = "productList",cacheManager = "defaultCacheManager")
+    public List<ProductListResponseDto> getProductListPut() {
         return productConverter.convertProductsToProductListResponseDto(productRepository.findAll());
     }
 
