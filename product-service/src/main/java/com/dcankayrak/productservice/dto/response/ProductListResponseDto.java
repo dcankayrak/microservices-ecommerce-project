@@ -9,5 +9,7 @@ public class ProductListResponseDto {
     private String name;
     private BigDecimal price;
     private String imageUrl;
+    private Double discountRate;
+    private BigDecimal afterDiscount;
     private String slug;
 }

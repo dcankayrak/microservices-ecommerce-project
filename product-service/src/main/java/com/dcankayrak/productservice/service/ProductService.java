@@ -1,5 +1,6 @@
 package com.dcankayrak.productservice.service;
 
+import com.dcankayrak.productservice.converter.GeneralConverter;
 import com.dcankayrak.productservice.converter.ProductConverter;
 import com.dcankayrak.productservice.core.Slugify;
 import com.dcankayrak.productservice.dto.request.product.ProductSaveRequestDto;
@@ -7,6 +8,7 @@ import com.dcankayrak.productservice.dto.request.product.ProductUpdateRequestDto
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.exception.ProductNotFoundException;
+import com.dcankayrak.productservice.repository.OrderRepository;
 import com.dcankayrak.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -21,6 +23,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductConverter productConverter;
+    private final GeneralConverter generalConverter;
     private final Slugify slugify;
 
     @Cacheable(value = "productList",cacheManager = "defaultCacheManager")
@@ -43,6 +46,7 @@ public class ProductService {
         tempProduct.setPrice(request.getPrice());
         tempProduct.setDescription(request.getDescription());
         tempProduct.setSlug(slugify.slugify(request.getName(),'p'));
+        tempProduct.setDiscountRate(request.getDiscountRate());
         productRepository.save(tempProduct);
     }
 
@@ -61,5 +65,11 @@ public class ProductService {
         ProductListResponseDto tempProductListResponseDto = this.productConverter
                 .convertProductToProductListResponseDto(tempProduct);
         return tempProductListResponseDto;
+    }
+
+    public List<ProductListResponseDto> getProductsWithOrder(Long orderId) {
+        List<Product> products = this.productRepository.findProductsByOrderId(orderId);
+        List<ProductListResponseDto> resultList = this.generalConverter.convertEntitiesToTargetEntity(products,ProductListResponseDto.class);
+        return resultList;
     }
 }

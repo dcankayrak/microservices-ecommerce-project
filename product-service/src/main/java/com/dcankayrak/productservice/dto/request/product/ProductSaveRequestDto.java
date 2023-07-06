@@ -9,4 +9,5 @@ public class ProductSaveRequestDto {
     private String name;
     private BigDecimal price;
     private String description;
+    private Double discountRate;
 }

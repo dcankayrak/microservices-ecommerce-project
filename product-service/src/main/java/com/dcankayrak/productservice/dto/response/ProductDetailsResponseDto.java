@@ -10,5 +10,7 @@ public class ProductDetailsResponseDto {
     private BigDecimal price;
     private String imageUrl;
     private String description;
+    private Double discountRate;
+    private BigDecimal afterDiscount;
     private String slug;
 }

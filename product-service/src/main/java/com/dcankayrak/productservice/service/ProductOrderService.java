@@ -1,6 +1,8 @@
 package com.dcankayrak.productservice.service;
 
+import com.dcankayrak.productservice.converter.GeneralConverter;
 import com.dcankayrak.productservice.dto.request.productOrder.ProductOrderSaveRequestDto;
+import com.dcankayrak.productservice.dto.response.OrderListByUserResponseDto;
 import com.dcankayrak.productservice.entity.Order;
 import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.entity.ProductOrder;
@@ -12,6 +14,8 @@ import com.dcankayrak.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ProductOrderService {
@@ -20,6 +24,7 @@ public class ProductOrderService {
     private final ProductRepository productRepository;
     private final OrderRepository orderRepository;
     private final UserServiceClient userServiceClient;
+    private final GeneralConverter generalConverter;
     public void saveProductOrder(ProductOrderSaveRequestDto request) {
         Product tempProduct = productRepository
                 .findById(request.getProductId()).orElseThrow(() -> {throw new ProductNotFoundException("Aradığınız ürün bulunamadı!");});
@@ -34,5 +39,11 @@ public class ProductOrderService {
         }else{
             throw new RuntimeException("Kullanıcı Bulunamadı!");
         }
+    }
+
+    public List<OrderListByUserResponseDto> getOrdersByUser(Long userId) {
+        List<ProductOrder> tempList = this.productOrderRepository.findByUserId(userId);
+        List<OrderListByUserResponseDto> resultList = this.generalConverter.convertEntitiesToTargetEntity(tempList, OrderListByUserResponseDto.class);
+        return resultList;
     }
 }

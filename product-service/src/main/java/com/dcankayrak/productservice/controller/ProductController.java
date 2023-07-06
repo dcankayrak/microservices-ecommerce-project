@@ -33,6 +33,11 @@ public class ProductController {
         return new ResponseEntity<>(this.productService.getProductWithSlug(productSlug), HttpStatus.OK);
     }
 
+    @GetMapping("/order/{orderId}")
+    public ResponseEntity<List<ProductListResponseDto>> getProductsWithOrder(@PathVariable Long orderId){
+        return new ResponseEntity<>(this.productService.getProductsWithOrder(orderId), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Void> saveProduct(@RequestBody ProductSaveRequestDto request){
         this.productService.saveProduct(request);
