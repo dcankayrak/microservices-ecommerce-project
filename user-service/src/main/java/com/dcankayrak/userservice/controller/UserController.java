@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -27,7 +27,7 @@ public class UserController {
 
     @RequestMapping("/{id}")
     public ResponseEntity<User> getUserWithId(@RequestParam Long id){
-        return this.userService.getUserWithId(id);
+        return new ResponseEntity<>(this.userService.getUserWithId(id),HttpStatus.OK);
     }
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody UserRegisterRequestDto request){
