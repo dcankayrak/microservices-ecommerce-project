@@ -12,4 +12,9 @@ public class ExceptionHandling {
     public ResponseEntity<String> productNotFoundExceptionHandler(ProductNotFoundException e){
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<String> runtimeExceptionHandler(RuntimeException e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

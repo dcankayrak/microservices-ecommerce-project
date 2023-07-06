@@ -20,15 +20,21 @@ public class UserController {
     private final UserService userService;
     private final ProductServiceClient productServiceClient;
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
     public List<ProductListItemResponseDto> test(){
         return productServiceClient.getProducts();
     }
 
-    @RequestMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> getUserWithId(@RequestParam Long id){
         return new ResponseEntity<>(this.userService.getUserWithId(id),HttpStatus.OK);
     }
+
+    @GetMapping("/exists/{userId}")
+    public ResponseEntity<Boolean> isUserExists(@PathVariable Long userId){
+        return new ResponseEntity<>(this.userService.isUserExists(userId),HttpStatus.OK);
+    }
+
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody UserRegisterRequestDto request){
         this.userService.saveUser(request);

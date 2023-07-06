@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -46,5 +48,10 @@ public class UserService {
     public User getUserWithId(Long id) {
         User findedUser = this.userRepository.findById(id).orElseThrow(() -> {throw new UserException("Aradığınız kullanıcı bulunamadı!");});
         return findedUser;
+    }
+
+    public Boolean isUserExists(Long id) {
+        Optional<User> findedUser = this.userRepository.findById(id);
+        return findedUser.isPresent();
     }
 }
