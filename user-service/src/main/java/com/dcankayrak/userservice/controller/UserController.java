@@ -1,7 +1,9 @@
 package com.dcankayrak.userservice.controller;
 
+import com.dcankayrak.userservice.dto.request.UserLoginRequestDto;
 import com.dcankayrak.userservice.dto.request.UserRegisterRequestDto;
 import com.dcankayrak.userservice.dto.response.ProductListItemResponseDto;
+import com.dcankayrak.userservice.dto.response.UserLoginResponseDto;
 import com.dcankayrak.userservice.entity.User;
 import com.dcankayrak.userservice.feign.ProductServiceClient;
 import com.dcankayrak.userservice.service.UserService;
@@ -13,17 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final ProductServiceClient productServiceClient;
-
-    @GetMapping("/test")
-    public List<ProductListItemResponseDto> test(){
-        return productServiceClient.getProducts();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserWithId(@RequestParam Long id){
@@ -35,9 +32,14 @@ public class UserController {
         return new ResponseEntity<>(this.userService.isUserExists(userId),HttpStatus.OK);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<UserLoginResponseDto> login(@RequestBody UserLoginRequestDto request){
+        UserLoginResponseDto result = this.userService.login(request);
+        return new ResponseEntity<>(result,HttpStatus.OK);
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody UserRegisterRequestDto request){
-        this.userService.saveUser(request);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<UserLoginResponseDto> register(@RequestBody UserRegisterRequestDto request){
+        return new ResponseEntity<>(this.userService.saveUser(request),HttpStatus.CREATED);
     }
 }
