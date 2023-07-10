@@ -20,7 +20,9 @@
 
 ### Category
 - `GET api/v1/categories` -> Tüm kategorileri getirir.
-- `GET api/v1/categories/create` -> Yeni kategori oluşturur.
+- `POST api/v1/categories/create` -> Yeni kategori oluşturur.
+- `PUT api/v1/categories/update/{categoryId}` -> Varolan kategoriyi düzenler.
+- `DELETE api/v1/categories/delete/{categoryId}` -> Kategoriyi siler.
 
 ### ProductOrder
 - `GET api/v1/orders/user/{userId}` -> İstenen kullanıcının siparişlerini getirir.
