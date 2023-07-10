@@ -25,3 +25,7 @@
 ### ProductOrder
 - GET api/v1/orders/user/{userId} -> İstenen kullanıcının siparişlerini getirir.
 - POST api/v1/orders -> Sipariş oluşturur.
+
+## Swagger
+- product-service
+- user-service
