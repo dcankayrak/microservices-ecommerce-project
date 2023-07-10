@@ -1,9 +1,7 @@
 package com.dcankayrak.productservice.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,6 +10,8 @@ import java.util.List;
 @Setter
 @Builder
 @Table(name = "categories")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category extends BaseEntity {
 
     private String name;

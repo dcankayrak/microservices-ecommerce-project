@@ -2,6 +2,7 @@ package com.dcankayrak.productservice.controller;
 
 import com.dcankayrak.productservice.dto.request.product.ProductSaveRequestDto;
 import com.dcankayrak.productservice.dto.request.product.ProductUpdateRequestDto;
+import com.dcankayrak.productservice.dto.response.ProductDetailsResponseDto;
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,8 @@ public class ProductController {
         return new ResponseEntity<>(this.productService.getProductList(), HttpStatus.OK);
     }
 
-    @GetMapping("/{productSlug}")
-    public ResponseEntity<ProductListResponseDto> getProductWithSlug(@PathVariable String productSlug){
+    @GetMapping("/details/{productSlug}")
+    public ResponseEntity<ProductDetailsResponseDto> getProductWithSlug(@PathVariable String productSlug){
         return new ResponseEntity<>(this.productService.getProductWithSlug(productSlug), HttpStatus.OK);
     }
 

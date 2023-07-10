@@ -5,6 +5,7 @@ import com.dcankayrak.productservice.converter.ProductConverter;
 import com.dcankayrak.productservice.core.Slugify;
 import com.dcankayrak.productservice.dto.request.product.ProductSaveRequestDto;
 import com.dcankayrak.productservice.dto.request.product.ProductUpdateRequestDto;
+import com.dcankayrak.productservice.dto.response.ProductDetailsResponseDto;
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.exception.ProductNotFoundException;
@@ -28,16 +29,16 @@ public class ProductService {
 
     @Cacheable(value = "productList",cacheManager = "defaultCacheManager")
     public List<ProductListResponseDto> getProductList() {
-        return productConverter.convertProductsToProductListResponseDto(productRepository.findAll());
+        return this.generalConverter.convertEntitiesToTargetEntity(productRepository.findAll(),ProductListResponseDto.class);
     }
 
     @CacheEvict(value = "productList",cacheManager = "defaultCacheManager")
     public List<ProductListResponseDto> getProductListPut() {
-        return productConverter.convertProductsToProductListResponseDto(productRepository.findAll());
+        return this.generalConverter.convertEntitiesToTargetEntity(productRepository.findAll(),ProductListResponseDto.class);
     }
 
-    public ProductListResponseDto getProductWithSlug(String slug) {
-        return productConverter.convertProductToProductListResponseDto(productRepository.findBySlug(slug));
+    public ProductDetailsResponseDto getProductWithSlug(String slug) {
+        return generalConverter.convertEntityToTargetEntity(productRepository.findBySlug(slug),ProductDetailsResponseDto.class);
     }
 
     public void saveProduct(ProductSaveRequestDto request) {
