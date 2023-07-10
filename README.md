@@ -11,7 +11,7 @@
 
 ## API
 ### Product
-- GET api/v1/products -> Tüm ürünleri getirir.
+- `GET api/v1/products -> Tüm ürünleri getirir.`
 - GET api/v1/products/details/{slug} -> Ürün detaylarını getirir.
 - GET api/v1/products/order/{orderId} -> İstenilen siparişe ait ürünleri getirir.
 - POST api/v1/products/create -> Ürün oluşturmayı sağlar.
