@@ -1,4 +1,4 @@
-# Ecommerce_Project_Microservices
+# SpringBoot-Microservice-Ecommerce-Project
 ## Tech Stack
 - Spring Boot
 - Swagger/Open API
