@@ -46,4 +46,9 @@ public class CategoryService {
         tempCategory.setName(categoryUpdateRequestDto.getName());
         categoryRepository.save(tempCategory);
     }
+
+    public CategoryListResponseDto getCategoryWithSlug(String slug) {
+        Category tempCategory = this.categoryRepository.findBySlug(slug).orElseThrow(() -> new RuntimeException("Böyle bir kategori bulunmamaktadır"));
+        return this.generalConverter.convertEntityToTargetEntity(tempCategory,CategoryListResponseDto.class);
+    }
 }

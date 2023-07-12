@@ -23,6 +23,11 @@ public class CategoryController {
         return new ResponseEntity<>(this.categoryService.getCategories(), HttpStatus.OK);
     }
 
+    @GetMapping("/{slug}")
+    public ResponseEntity<CategoryListResponseDto> getCategoryWithSlug(@PathVariable String slug){
+        return new ResponseEntity<>(this.categoryService.getCategoryWithSlug(slug), HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Void> saveCategory(@RequestBody CategorySaveRequestDto categorySaveRequestDto){
         this.categoryService.saveCategory(categorySaveRequestDto);

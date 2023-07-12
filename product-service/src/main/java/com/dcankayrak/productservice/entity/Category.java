@@ -17,8 +17,6 @@ public class Category extends BaseEntity {
     private String name;
     private String slug;
 
-    @OneToMany(mappedBy = "category",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    private List<SubCategory> subCategories;
+    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+    private List<Product> products;
 }

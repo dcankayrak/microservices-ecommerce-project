@@ -9,4 +9,7 @@ public class ProductUpdateRequestDto {
     private String name;
     private BigDecimal price;
     private String description;
+    private Double discountRate;
+    private String imageUrl;
+    private Long categoryId;
 }

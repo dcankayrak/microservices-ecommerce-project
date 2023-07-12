@@ -29,6 +29,16 @@ public class ProductController {
         return new ResponseEntity<>(this.productService.getProductList(), HttpStatus.OK);
     }
 
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<ProductListResponseDto>> getProductsWithCategory(@PathVariable Long categoryId){
+        return new ResponseEntity<>(this.productService.getProductsWithCategory(categoryId), HttpStatus.OK);
+    }
+
+    @GetMapping("/category/{categorySlug}")
+    public ResponseEntity<List<ProductListResponseDto>> getProductsWithCategorySlug(@PathVariable String categorySlug){
+        return new ResponseEntity<>(this.productService.getProductsWithCategorySlug(categorySlug), HttpStatus.OK);
+    }
+
     @GetMapping("/details/{productSlug}")
     public ResponseEntity<ProductDetailsResponseDto> getProductWithSlug(@PathVariable String productSlug){
         return new ResponseEntity<>(this.productService.getProductWithSlug(productSlug), HttpStatus.OK);

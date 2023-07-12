@@ -1,11 +1,10 @@
 package com.dcankayrak.productservice.entity;
 
 import com.dcankayrak.productservice.core.Slugify;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.io.BigDecimalParser;
 import jakarta.annotation.PostConstruct;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -30,6 +29,11 @@ public class Product extends BaseEntity {
     private String description;
     @Column(name = "slug")
     private String slug;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
 
     public String getName() {
         return name;
@@ -84,5 +88,13 @@ public class Product extends BaseEntity {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

@@ -92,6 +92,8 @@ public class UserService implements UserDetailsService {
         return UserLoginResponseDto
                 .builder()
                 .token(jwt)
+                .userId(user.getId())
+                .firstName(user.getFirstName())
                 .build();
     }
 

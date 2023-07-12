@@ -23,7 +23,7 @@ public class UserController {
     private final ProductServiceClient productServiceClient;
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserWithId(@RequestParam Long id){
+    public ResponseEntity<User> getUserWithId(@PathVariable Long id){
         return new ResponseEntity<>(this.userService.getUserWithId(id),HttpStatus.OK);
     }
 

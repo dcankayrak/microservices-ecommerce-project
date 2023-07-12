@@ -10,4 +10,6 @@ public class ProductSaveRequestDto {
     private BigDecimal price;
     private String description;
     private Double discountRate;
+    private String imageUrl;
+    private Long categoryId;
 }
