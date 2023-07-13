@@ -1,6 +1,7 @@
 package com.dcankayrak.productservice.controller;
 
 import com.dcankayrak.productservice.dto.request.cart.AddToCartRequestDto;
+import com.dcankayrak.productservice.dto.response.CartListResponseDto;
 import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.service.CartService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<List<ProductListResponseDto>> getCart(@PathVariable Long userId){
+    public ResponseEntity<List<CartListResponseDto>> getCart(@PathVariable Long userId){
         return new ResponseEntity<>(this.cartService.getCart(userId),HttpStatus.OK);
     }
 
