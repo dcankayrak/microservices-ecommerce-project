@@ -1,7 +1,6 @@
 package com.dcankayrak.productservice.service;
 
 import com.dcankayrak.productservice.converter.GeneralConverter;
-import com.dcankayrak.productservice.converter.ProductConverter;
 import com.dcankayrak.productservice.core.Slugify;
 import com.dcankayrak.productservice.dto.request.product.ProductSaveRequestDto;
 import com.dcankayrak.productservice.dto.request.product.ProductUpdateRequestDto;
@@ -11,7 +10,6 @@ import com.dcankayrak.productservice.entity.Category;
 import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.exception.ProductNotFoundException;
 import com.dcankayrak.productservice.repository.CategoryRepository;
-import com.dcankayrak.productservice.repository.OrderRepository;
 import com.dcankayrak.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -25,7 +23,6 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final ProductConverter productConverter;
     private final GeneralConverter generalConverter;
     private final CategoryRepository categoryRepository;
     private final Slugify slugify;
@@ -70,8 +67,8 @@ public class ProductService {
         tempProduct.setDescription(request.getDescription());
         this.productRepository.save(tempProduct);
 
-        ProductListResponseDto tempProductListResponseDto = this.productConverter
-                .convertProductToProductListResponseDto(tempProduct);
+        ProductListResponseDto tempProductListResponseDto = this.generalConverter
+                .convertEntityToTargetEntity(tempProduct,ProductListResponseDto.class);
         return tempProductListResponseDto;
     }
 

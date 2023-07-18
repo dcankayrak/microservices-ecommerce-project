@@ -2,6 +2,7 @@ package com.dcankayrak.productservice.service;
 
 import com.dcankayrak.productservice.converter.GeneralConverter;
 import com.dcankayrak.productservice.dto.request.productOrder.ProductOrderSaveRequestDto;
+import com.dcankayrak.productservice.dto.response.CartListResponseDto;
 import com.dcankayrak.productservice.dto.response.OrderListByUserResponseDto;
 import com.dcankayrak.productservice.entity.Order;
 import com.dcankayrak.productservice.entity.Product;
@@ -25,16 +26,18 @@ public class ProductOrderService {
     private final OrderRepository orderRepository;
     private final UserServiceClient userServiceClient;
     private final GeneralConverter generalConverter;
-    public void saveProductOrder(ProductOrderSaveRequestDto request) {
+    private final OrderService orderService;
+    public void saveProductOrder(ProductOrderSaveRequestDto request,Long orderId,Long userId) {
         Product tempProduct = productRepository
-                .findById(request.getProductId()).orElseThrow(() -> {throw new ProductNotFoundException("Aradığınız ürün bulunamadı!");});
-        Order tempOrder = orderRepository.findById(request.getOrderId()).orElseThrow();
+                .findBySlug(request.getProductSlug());
+        Order tempOrder = this.orderRepository.findById(orderId).orElseThrow();
 
-        if(userServiceClient.isUserExists(request.getCustomerId())){
+        if(tempProduct != null &&userServiceClient.isUserExists(userId)){
             ProductOrder newProductOrder = new ProductOrder();
             newProductOrder.setProduct(tempProduct);
             newProductOrder.setOrder(tempOrder);
-            newProductOrder.setUserId(request.getCustomerId());
+            newProductOrder.setUserId(userId);
+            newProductOrder.setQuantity(request.getQuantity());
             productOrderRepository.save(newProductOrder);
         }else{
             throw new RuntimeException("Kullanıcı Bulunamadı!");
@@ -45,5 +48,13 @@ public class ProductOrderService {
         List<ProductOrder> tempList = this.productOrderRepository.findByUserId(userId);
         List<OrderListByUserResponseDto> resultList = this.generalConverter.convertEntitiesToTargetEntity(tempList, OrderListByUserResponseDto.class);
         return resultList;
+    }
+
+    public void createProductOrders(List<ProductOrderSaveRequestDto> request,Long userId) {
+        Order order = this.orderService.createOrder();
+
+        for (ProductOrderSaveRequestDto product:request) {
+            this.saveProductOrder(product,order.getId(),userId);
+        }
     }
 }

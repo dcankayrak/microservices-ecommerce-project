@@ -19,4 +19,5 @@ public class ProductOrder extends BaseEntity{
     private Order order;
 
     private Long userId;
+    private int quantity;
 }
