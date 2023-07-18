@@ -4,6 +4,7 @@ import com.dcankayrak.productservice.converter.GeneralConverter;
 import com.dcankayrak.productservice.dto.request.productOrder.ProductOrderSaveRequestDto;
 import com.dcankayrak.productservice.dto.response.CartListResponseDto;
 import com.dcankayrak.productservice.dto.response.OrderListByUserResponseDto;
+import com.dcankayrak.productservice.dto.response.ProductListResponseDto;
 import com.dcankayrak.productservice.entity.Order;
 import com.dcankayrak.productservice.entity.Product;
 import com.dcankayrak.productservice.entity.ProductOrder;
@@ -15,6 +16,8 @@ import com.dcankayrak.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,7 +49,18 @@ public class ProductOrderService {
 
     public List<OrderListByUserResponseDto> getOrdersByUser(Long userId) {
         List<ProductOrder> tempList = this.productOrderRepository.findByUserId(userId);
-        List<OrderListByUserResponseDto> resultList = this.generalConverter.convertEntitiesToTargetEntity(tempList, OrderListByUserResponseDto.class);
+        List<OrderListByUserResponseDto> resultList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+        for (ProductOrder item:tempList
+             ) {
+            OrderListByUserResponseDto tempItem = new OrderListByUserResponseDto();
+            tempItem.setProduct(this.generalConverter.convertEntityToTargetEntity(item.getProduct(), ProductListResponseDto.class));
+            tempItem.setQuantity(item.getQuantity());
+            String time = sdf.format(item.getCreateDate());
+            tempItem.setDate(time);
+            resultList.add(tempItem);
+        }
+
         return resultList;
     }
 
