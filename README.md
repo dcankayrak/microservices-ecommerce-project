@@ -49,6 +49,8 @@
 ![image](https://github.com/DCanKayrak/SpringBoot-Microservice-Ecommerce-Project/assets/94143272/e95a30ae-74ae-43d5-b34f-6d70efce074b)
 ![image](https://github.com/DCanKayrak/SpringBoot-Microservice-Ecommerce-Project/assets/94143272/53813d92-b946-4095-a266-d7d8cdccc8ec)
 
+[Video Link](https://www.youtube.com/watch?v=q2C4jaFmWdI)
+
 ### ☎️ İletişim
 ---
 [Frontend Projesinin Linki](https://github.com/DCanKayrak/SpringBoot-Microservice-Ecommerce-Project-Frontend)
