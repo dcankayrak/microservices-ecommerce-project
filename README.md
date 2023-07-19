@@ -18,7 +18,7 @@
 - Jpa Repository
 - Lombok
 
-### Projenin diğer projelerden farklı kılan özellikleri
+### 💫 Projenin diğer projelerden farklı kılan özellikleri
 - API'larımı user friendly olarak dizayn ettim. (/product/xiaomi-redmi-note12 vb.)
 - Hibernate N+1 problemine özellikle dikkat ettim. Lazy olarak tanımladığımız field'ların birden fazla istek atmasını engellemek için HQL query'leri ile verilerimi çektim.
 - API'larda direkt olarak veritabanı tablo nesnelerimi dönmedim. Bunun yerine DTO'ları kullandım.
