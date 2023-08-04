@@ -11,6 +11,9 @@
 
 ### ⚙ Kullanılan Teknolojiler
 - Spring Boot
+- Spring Security
+- JWT Tokens
+- Authentication
 - Swagger/Open API
 - PostgreSQL
 - OpenFeign
