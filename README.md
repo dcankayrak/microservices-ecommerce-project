@@ -17,6 +17,7 @@
 - ModelMapper
 - Jpa Repository
 - Lombok
+- Microservices
 
 ### 💫 Projenin diğer projelerden farklı kılan özellikleri
 - API'larımı user friendly olarak dizayn ettim. (/product/xiaomi-redmi-note12 vb.)
