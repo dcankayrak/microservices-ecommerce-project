@@ -1,4 +1,4 @@
-# SpringBoot-Microservice-Ecommerce-Project
+# ecommerce-project
 
 ❗Bu proje Bursa Büyükşehir Belediyesi ve Kodluyoruz işbirliğinde gerçekleştirilen 6 haftalık eğitimin bitirme projesi olarak bootcamp sürecinde öğrendiğimiz/kendimize kattığımız bilgiler ışığında geliştirilmiştir.
 
