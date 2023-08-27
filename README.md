@@ -1,6 +1,6 @@
 # ecommerce-project
 
-❗Bu proje Bursa Büyükşehir Belediyesi ve Kodluyoruz işbirliğinde gerçekleştirilen 6 haftalık eğitimin bitirme projesi olarak bootcamp sürecinde öğrendiğimiz/kendimize kattığımız bilgiler ışığında geliştirilmiştir.
+❗Bu proje Bursa Büyükşehir Belediyesi ve Kodluyoruz işbirliğinde gerçekleştirilen 6 haftalık eğitimin bitirme projesi olarak bootcamp sürecinde öğrendiğimiz/kendimize kattığımız bilgilerle geliştirilmiştir.
 
 🎯Bu projeyle mikroservis mimarileri, cache işlemleri, dışarıdaki bir API/service'den veri çekmek, Spring Security ile API'larımızdaki güvenliği sağlamak ve JWT tokenlar hakkında daha fazla bilgi edinmek ve kendimin en çok nereye gidebileceğini merak ederek geliştirdiğim bir proje. Bu projede son derece SOLID kurallarını da hesaba katarak geliştirilmeye çalıştım. Web geliştirme projelerinin en kapsamlı projelerinden birisi olan E-Ticaret projesini biraz daha basite indirgeyerek, temel işlevleri içeren bir uygulama çıkardım. Bu projenin ön yüzü de bulunmakta. Ona aşağıdan erişebilirsiniz.
 
